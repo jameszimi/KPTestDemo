@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="photoData"
+            type="stw.jamez.kptestdemo.model.PhotoResponseItem" />
+
+    </data>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/detail_toolbar"
+            layout="@layout/toolbar_home"
+            app:toolbarTitle="@{photoData.title}" />
+
+        <ImageView
+            imageFromUrl="@{photoData.url}"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitCenter"
+            android:transitionName="@string/photo_transition" />
+
+    </LinearLayout>
+
+</layout>

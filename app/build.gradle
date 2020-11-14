@@ -1,12 +1,19 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'kotlin-android-extensions'
 }
 
 android {
     compileSdkVersion 30
-    buildToolsVersion "30.0.0"
-
+    buildToolsVersion "30.0.2"
+    buildFeatures {
+        dataBinding = true
+    }
+    androidExtensions {
+        experimental = true
+    }
     defaultConfig {
         applicationId "stw.jamez.kptestdemo"
         minSdkVersion 22
@@ -35,11 +42,54 @@ android {
 dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.2.0'
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'com.google.android.material:material:1.1.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.core:core-ktx:1.3.2'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'com.google.android.material:material:1.2.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.1'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.1'
+    implementation "com.google.android.material:material:$rootProject.materialVersion"
     testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    //Retrofit
+    implementation "com.squareup.retrofit2:retrofit:2.9.0"
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.9.0'
+    implementation "com.squareup.retrofit2:converter-gson:2.9.0"
+    implementation "io.reactivex.rxjava2:rxandroid:2.1.1"
+
+    //OKhttp
+    testImplementation('com.squareup.okhttp3:mockwebserver:4.9.0')
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
+
+    //Picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
+    //display unit size
+    implementation 'com.intuit.sdp:sdp-android:1.0.6'
+    implementation 'com.intuit.ssp:ssp-android:1.0.6'
+
+    //dataBinding
+    implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.life_cycle_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.life_cycle_version"
+    implementation "androidx.lifecycle:lifecycle-reactivestreams-ktx:2.2.0"
+
+    implementation 'androidx.recyclerview:recyclerview-selection:1.0.0'
+
+    //Paging
+    implementation "androidx.paging:paging-runtime-ktx:3.0.0-alpha09"
+
+    //Dagger 2
+    implementation "com.google.dagger:hilt-android:$rootProject.hiltVersion"
+    kapt "com.google.dagger:hilt-android-compiler:$rootProject.hiltVersion"
+    kapt "com.squareup.inject:assisted-inject-processor-dagger2:$rootProject.assistedInjectVersion"
+    kapt "androidx.hilt:hilt-compiler:$rootProject.hiltViewModelVersion"
+
+    // Testing dependencies
+    kaptAndroidTest "com.google.dagger:hilt-android-compiler:$rootProject.hiltVersion"
+    androidTestImplementation "com.google.dagger:hilt-android-testing:$rootProject.hiltVersion"
+
+    //Transformation
+    implementation "com.github.skydoves:transformationlayout:1.0.6"
 }
