@@ -12,7 +12,8 @@ import stw.jamez.kptestdemo.model.PhotoResponse
 import stw.jamez.kptestdemo.model.PhotoResponseItem
 
 class MainViewModel : ViewModel() {
-    val photoList = MutableLiveData<ArrayList<PhotoResponseItem>>()
+
+    val photoList = MutableLiveData<PhotoResponse>()
 
     fun getPhotoList() {
         PhotoService.create().getPhoto().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(object : Observer<PhotoResponse> {

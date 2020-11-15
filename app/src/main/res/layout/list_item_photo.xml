@@ -41,6 +41,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
+                    android:textColor="@color/white"
                     android:text="@{photoData.title}"
                     android:textSize="@dimen/_12ssp"
                     android:layout_margin="@dimen/_8sdp"

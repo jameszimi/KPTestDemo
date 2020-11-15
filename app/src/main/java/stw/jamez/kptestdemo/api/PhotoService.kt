@@ -18,15 +18,8 @@ interface PhotoService {
         private const val BASE_URL = "https://jsonplaceholder.typicode.com/"
 
         fun create(): PhotoService {
-            val logger = HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BASIC }
-
-            val client = OkHttpClient.Builder()
-                .addInterceptor(logger)
-                .build()
-
             return Retrofit.Builder()
                 .baseUrl(BASE_URL)
-                .client(client)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()

@@ -4,9 +4,11 @@ import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import stw.jamez.kptestdemo.R
 import stw.jamez.kptestdemo.base.BaseActivity
 import stw.jamez.kptestdemo.databinding.ActivityMainBinding
@@ -36,18 +38,30 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
-
         binding.photoList.apply {
             layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
             adapter = mAdapter
         }
 
+        binding.swipeLayout.apply {
+            setColorSchemeColors(ContextCompat.getColor(this@MainActivity, R.color.colorPrimary))
+            setOnRefreshListener {
+                this.isRefreshing = false
+                viewModel.getPhotoList()
+            }
+        }
+
         viewModel.apply {
-            getPhotoList()
             photoList.observe(this@MainActivity, {
                 mAdapter.submitList(it)
             })
         }
 
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getPhotoList()
     }
 }
